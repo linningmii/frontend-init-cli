@@ -12,7 +12,6 @@ const config = require('./config/config.json');
  */
 const exec = Promise.promisify(child_process.exec);
 
-console.log(process.cwd());
 /**
  * clone对应模板项目
  * @param type build tools type
@@ -24,27 +23,33 @@ function gitClone(type) {
 /**
  * clone完毕移除本地的.git目录
  */
-function cloneFinished() {
-  // print Cloning git repo
-  console.log(colors.yellow('Cloning Template Repo...'));
-
+function removeGitDir() {
   return exec(`rm -rf ${path.resolve(process.cwd(), './.git')}`);
 }
 
 function installDependencies() {
-  exec('yarn install')
+  return exec('yarn install');
 }
 
-function run() {
-  gitClone('webpack')
-    .then(cloneFinished)
+async function run() {
+  console.log(colors.yellow('Cloning Template Repo...'));
+
+  await gitClone('webpack')
+    .then()
     .catch(err => {
       throw colors.red(err.message);
-    })
+    });
+
+  await removeGitDir()
     .then(() => console.log(colors.green('Template project clone finished')))
     .catch(err => {
       throw colors.red(err.message);
     });
+
+  console.log(colors.yellow('Installing dependencies...'));
+
+  installDependencies()
+    .then(() => console.log(colors.green('Dependencies installed')));
 }
 
 run();
