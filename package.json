@@ -5,6 +5,7 @@
   "repository": "https://github.com/linningmii/frontend-init-cli.git",
   "license": "MIT",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "colors": "^1.1.2"
   }
 }
