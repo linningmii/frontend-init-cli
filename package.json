@@ -1,0 +1,10 @@
+{
+  "name": "frontend-init-cli",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/linningmii/frontend-init-cli.git",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.1.2"
+  }
+}
